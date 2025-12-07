@@ -5,15 +5,47 @@
 
 .main {
   display: flex;
- 
   width: 100%;
-  
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
  
 }
 
+
+/* Navigation Bar Styles */
+.navbar { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 20px 20px; 
+  border-bottom: 1px solid #eee; 
+}
+
+.navLinks{
+  display: flex; gap: 15px; align-items: center; 
+}
+
+/* hero */
+.hero{ 
+  text-align: center; padding: 80px 0;
+
+}
+
+.hero h1 { font-size: 3rem; margin-bottom: 10px; }
+.hero h2 { font-size: 1.5rem; color: #555; margin-bottom: 40px; }
+.heroSubtext { margin-top: 15px; color: #888; }
+/* Preview Placeholder */
+.appPreviewPlaceholder { background-color: #ccc; height: 300px; width: 100%; max-width: 800px; margin: 40px auto 0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #333; font-style: italic; }
+
+/* Features */
+        .featuresSection { padding: 60px 20px; text-align: center; }
+        .featuresGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        .featureCard { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left;  color: black;}
+        .featureCard h3 { color: #0070f3; }
+
+/* Final CTA */
+.ctaFinal { text-align: center; padding: 60px 0; background-color: #e9eff5; margin: 40px 20px; border-radius: 12px; color: black; }
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
