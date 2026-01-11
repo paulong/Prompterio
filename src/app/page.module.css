@@ -42,7 +42,7 @@
         .featuresSection { padding: 60px 20px; text-align: center; }
         .featuresGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
         .featureCard { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left;  color: black;}
-        .featureCard h3 { color: #0070f3; }
+        .featureCard h3 { color: black; }
 
 /* Final CTA */
 .ctaFinal { text-align: center; padding: 60px 0; background-color: #e9eff5; margin: 40px 20px; border-radius: 12px; color: black; }
@@ -74,5 +74,89 @@
   .page {
     --background: #000;
     
+  }
+}
+
+/* Navigation Container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* Grouping for the User Info and Buttons */
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Space between Hi, App Link, and Logout */
+}
+
+/* The "Hi, Name" text */
+.welcomeText {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* The "Open App" button - making it stand out */
+.appLink {
+  background-color: #000;
+  color: #fff !important; /* Force white text */
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.appLink:hover {
+  background-color: #333;
+  transform: translateY(-1px);
+}
+
+/* The Logout Link */
+.signoutBtn {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-decoration: none;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.signoutBtn:hover {
+  color: #ff4757; /* A subtle red to indicate "action" */
+}
+
+/* Style for the original Primary Button component */
+.primaryButton {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  margin-top: 20px;
+  transition: opacity 0.2s;
+}
+
+.primaryButton:hover {
+  opacity: 0.8;
+}
+
+/* Responsive fix for mobile */
+@media (max-width: 600px) {
+  .userMenu {
+    gap: 10px;
+  }
+  .welcomeText {
+    display: none; /* Hide "Hi, Name" on tiny screens to save space */
   }
 }

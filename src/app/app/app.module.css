@@ -1,0 +1,91 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.5s ease;
+}
+
+.prompterArea {
+  width: 100%;
+  flex: 1;
+  overflow-y: scroll;
+  padding: 20vh 10%;
+  text-align: center;
+  scrollbar-width: thin;
+}
+
+/* Glass Scrollbar matching the dynamic contrast */
+.prompterArea::-webkit-scrollbar { width: 8px; }
+.prompterArea::-webkit-scrollbar-track { background: transparent; }
+.prompterArea::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1); /* This can be adjusted in JS if needed */
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+.scrollingText {
+  font-size: clamp(2.5rem, 8vw, 5.5rem); 
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  transition: color 0.5s ease;
+}
+
+.glassInput {
+  width: 80%;
+  max-width: 800px;
+  height: 200px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px;
+  font-size: 1.2rem;
+  outline: none;
+  margin-bottom: 350px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+}
+
+.countdownOverlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15rem;
+  font-weight: 900;
+  z-index: 2000;
+  pointer-events: none;
+  transition: color 0.5s ease;
+}
+
+.floatingControls {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 12px 24px;
+  border-radius: 50px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: background 0.5s ease;
+}
+
+.textBtn {
+  background: none;
+  border: none;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.5s ease;
+}
