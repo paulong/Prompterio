@@ -126,7 +126,7 @@ export default function TeleprompterPage() {
           }}
         >
           {text}
-          <div style={{ height: "60vh" }} />
+          <div style={{ height: "55vh" }} />
         </div>
       </div>
 

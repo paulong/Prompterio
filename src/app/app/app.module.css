@@ -9,11 +9,12 @@
   transition: background-color 0.5s ease;
 }
 
+
 .prompterArea {
   width: 100%;
   flex: 1;
   overflow-y: scroll;
-  padding: 20vh 10%;
+  padding: 60vh 10% 80vh 10%;
   text-align: center;
   scrollbar-width: thin;
 }
@@ -88,4 +89,10 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: color 0.5s ease;
+}
+
+@media (max-width: 600px) {
+  .prompterArea {
+    padding-top: 45vh; /* Un poco menos en móviles para no tardar tanto en ver el texto */
+  }
 }
