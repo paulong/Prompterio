@@ -55,6 +55,8 @@ export default function TeleprompterPage() {
     }
   };
 
+  // --- TODOS LOS EFFECTS JUNTOS Y ARRIBA ---
+  
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/auth");
@@ -78,8 +80,7 @@ export default function TeleprompterPage() {
     let frame;
     const move = () => {
       if (isScrolling && scrollRef.current) {
-        // Velocidad ajustada para ser suave
-        scrollRef.current.scrollTop += speed / 2.5;
+        scrollRef.current.scrollTop += speed / 3;
         frame = requestAnimationFrame(move);
       }
     };
@@ -87,75 +88,58 @@ export default function TeleprompterPage() {
     return () => cancelAnimationFrame(frame);
   }, [isScrolling, speed]);
 
+  // --- RETORNOS CONDICIONALES AL FINAL ---
+
   if (status === "loading") return <div className={styles.container}><p>Cargando...</p></div>;
+  
+  // Si no hay sesión o no es pro, mostramos un div vacío mientras el router redirige
+  // Esto evita que React se queje de los hooks
   if (!session || !session.user.isPro) return <div className={styles.container} />;
 
   return (
     <div className={styles.container} style={{ backgroundColor: bgColor }}>
-      
-      {/* 1. CUENTA REGRESIVA */}
       {countdown && (
         <div className={styles.countdownOverlay} style={{ color: contrastColor }}>
           {countdown}
         </div>
       )}
 
-      {/* 2. CUADRO DE TEXTO (Solo se ve si no está corriendo el prompter) */}
-      {!isScrolling && !countdown && (
-        <textarea 
-          className={styles.glassInput}
-          style={{ 
-            backgroundColor: getContrastColor(bgColor, 0.08), 
-            color: contrastColor, 
-            borderColor: getContrastColor(bgColor, 0.15) 
-          }}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Escribe tu guion aquí..."
-        />
-      )}
-
-      {/* 3. ÁREA DE LECTURA */}
       <div className={styles.prompterArea} ref={scrollRef}>
+        {!isScrolling && !countdown && (
+          <textarea 
+            className={styles.glassInput}
+            style={{ 
+              backgroundColor: getContrastColor(bgColor, 0.05), 
+              color: contrastColor, 
+              borderColor: getContrastColor(bgColor, 0.1) 
+            }}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+        )}
+        
         <div 
           className={styles.scrollingText} 
           style={{ 
             color: contrastColor,
-            /* Ocultamos el texto mientras editamos para que no distraiga */
-            opacity: isScrolling || countdown ? (countdown ? 0.2 : 1) : 0 
+            opacity: countdown ? 0.3 : 1 
           }}
         >
           {text}
+          <div style={{ height: "55vh" }} />
         </div>
       </div>
 
-      {/* 4. CONTROLES FLOTANTES */}
-      <div className={styles.floatingControls} style={{ background: getContrastColor(bgColor, 0.12) }}>
+      <div className={styles.floatingControls} style={{ background: getContrastColor(bgColor, 0.15) }}>
         <button onClick={() => router.push('/')} className={styles.textBtn} style={{ color: contrastColor }}>Home</button>
-        
         <button onClick={handlePlay} className={styles.textBtn} style={{ color: isScrolling ? '#ff4757' : contrastColor }}>
           {isScrolling ? "Stop" : "Play"}
         </button>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <span style={{ fontSize: '0.65rem', fontWeight: '900', color: getContrastColor(bgColor, 0.4) }}>SPEED</span>
-          <input 
-            type="range" 
-            min="1" 
-            max="10" 
-            value={speed} 
-            onChange={(e) => setSpeed(Number(e.target.value))} 
-            style={{ width: '100px', cursor: 'pointer' }} 
-          />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '0.6rem', fontWeight: '900', color: getContrastColor(bgColor, 0.5) }}>SPEED</span>
+          <input type="range" min="1" max="5" value={speed} onChange={(e) => setSpeed(Number(e.target.value))} style={{ width: '80px' }} />
         </div>
-
-        <input 
-          type="color" 
-          value={bgColor} 
-          onChange={(e) => setBgColor(e.target.value)} 
-          style={{ width: '30px', height: '30px', border: 'none', background: 'none', cursor: 'pointer', borderRadius: '50%' }} 
-        />
-
+        <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} style={{ width: '25px', height: '25px', border: 'none', background: 'none', cursor: 'pointer' }} />
         <button onClick={toggleFullScreen} className={styles.textBtn} style={{ color: contrastColor }}>
           {isFullScreen ? "Exit" : "Full"}
         </button>

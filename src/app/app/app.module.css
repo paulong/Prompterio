@@ -1,10 +1,8 @@
 .container {
- height: 100vh;
+  height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
-  /* Cambiamos esto para asegurar que el contenido hijo se centre */
-  justify-content: center; 
   align-items: center;
   overflow: hidden;
   position: relative;
@@ -39,23 +37,18 @@
 }
 
 .glassInput {
-width: 80%;
+  width: 80%;
   max-width: 800px;
-  height: 400px; /* Aumenté un poco el alto para que sea más cómodo */
+  height: 200px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 30px;
   font-size: 1.2rem;
   outline: none;
-  
-  /* ELIMINA el margin-bottom: 350px; */
-  margin: 0; 
-  
+  margin-bottom: 350px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.5); /* Un poco de fondo para el efecto glass */
   transition: all 0.5s ease;
-  z-index: 10; /* Asegura que esté por encima del fondo */
 }
 
 .countdownOverlay {
