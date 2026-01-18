@@ -73,15 +73,6 @@
   margin-bottom: 1.5rem;
   color: var(--text-main);
 }
-.logoGroup {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logoIcon {
-  font-size: 1.5rem;
-}
 
 /* Tip: El span con gradiente lo añadiremos en el JS */
 .gradientText {
@@ -101,21 +92,30 @@
 
 /* --- Preview Placeholder --- */
 .appPreviewPlaceholder {
+  margin: 40px auto 0;
+  width: 95%; /* Ocupa casi todo el ancho en móviles */
+  max-width: 1000px; /* Se detiene en 1000px en monitores grandes */
+  height: auto; /* IMPORTANTE: Deja que la altura sea automática según la imagen */
+  aspect-ratio: 16 / 9; /* Mantiene la proporción de pantalla prompter */
+  
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(0, 0, 0, 0.05);
-  height: 400px;
-  width: 90%;
-  max-width: 1000px;
-  margin: 60px auto 0;
-  border-radius: 24px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  
+  overflow: hidden; /* Para que la imagen no se salga de los bordes redondeados */
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
+.appPreviewPlaceholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Hace que la captura llene el espacio sin deformarse */
+  display: block;
+}
 
 /* --- Features Section --- */
 .featuresSection {
@@ -327,6 +327,14 @@
     gap: 50px;
   }
   .stepLine {
+    display: none;
+  }
+  .appPreviewPlaceholder {
+    width: 100%; /* En celulares pegamos la imagen a los bordes */
+    border-radius: 8px; /* Redondeado más pequeño para que encaje mejor */
+    margin-top: 30px;
+  }
+  .appPreviewPlaceholder::before {
     display: none;
   }
 }

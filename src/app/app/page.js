@@ -137,7 +137,7 @@ export default function TeleprompterPage() {
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '0.6rem', fontWeight: '900', color: getContrastColor(bgColor, 0.5) }}>SPEED</span>
-          <input type="range" min="1" max="20" value={speed} onChange={(e) => setSpeed(Number(e.target.value))} style={{ width: '80px' }} />
+          <input type="range" min="1" max="5" value={speed} onChange={(e) => setSpeed(Number(e.target.value))} style={{ width: '80px' }} />
         </div>
         <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} style={{ width: '25px', height: '25px', border: 'none', background: 'none', cursor: 'pointer' }} />
         <button onClick={toggleFullScreen} className={styles.textBtn} style={{ color: contrastColor }}>

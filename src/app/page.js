@@ -103,7 +103,6 @@ export default function Home() {
       </section>
 
       <section className={styles.howItWorks}>
-        
   <div className={styles.sectionHeader}>
     <span className={styles.badge}>Process</span>
     <h2>Master your video in 3 steps</h2>

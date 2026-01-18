@@ -36,7 +36,7 @@ export const metadata = {
     apple: '/apple-touch-icon.png',
     images: [
       {
-        url: '/og-image.png', // Tienes que crear esta imagen (1200x630) y ponerla en /public
+        url: '/android-chrome-512x512.png', // Tienes que crear esta imagen (1200x630) y ponerla en /public
         width: 1200,
         height: 630,
         alt: 'Prompterio App Preview',
@@ -48,7 +48,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Prompterio | Online Teleprompter',
     description: 'Read scripts like a pro on any device.',
-    images: ['/og-image.png'],
+    images: ['/android-chrome-512x512.png.png'],
   },
   robots: {
     index: true,
