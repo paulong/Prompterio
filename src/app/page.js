@@ -4,6 +4,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useSession, signOut } from "next-auth/react"; // Added signOut
 import styles from "./page.module.css";
+import Image from 'next/image'
+import { Zap, FlipHorizontal, MonitorSmartphone } from 'lucide-react';
+
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -16,15 +19,20 @@ export default function Home() {
   );
 
   // Simple component for a feature card
-  const FeatureCard = ({ title, description }) => (
-    <div className={styles.featureCard}>
-      <h3>{title}</h3>
-      <p>{description}</p>
+  const FeatureCard = ({ title, description, icon: Icon }) => (
+  <div className={styles.featureCard}>
+    <div className={styles.iconContainer}>
+      <Icon size={24} strokeWidth={2} />
     </div>
-  );
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+);
 
   return (
     <div className="container">
+      <div className={styles.blobBlue}></div>
+    <div className={styles.blobPurple}></div>
       <Head>
         <title>Prompterio</title>
         <meta name="description" content="Simple, web-based teleprompter app with customizable speed, size, and mirroring." />
@@ -32,6 +40,7 @@ export default function Home() {
 
       {/* --- 1. Navigation Bar (Dynamic) --- */}
       <nav className={styles.navbar}>
+        
         <h1>Prompterio</h1>
         <div className={styles.navLinks}>
           {status === "loading" ? (
@@ -61,28 +70,69 @@ export default function Home() {
         <p className={styles.heroSubtext}>No downloads. Works on any device.</p>
 
         <div className={styles.appPreviewPlaceholder}>
-          {/* Your preview image or video goes here */}
+         <p style={{color: '#999', fontSize: '0.9rem'}}>
+          <Image src="/5.png" alt="App Preview" width={650} height={400
+
+          } />
+          </p>
+         
         </div>
       </header>
-
+   <div className={styles.blobBlue}></div>
+    <div className={styles.blobPurple}></div>
       {/* --- 3. Features Section --- */}
       <section className={styles.featuresSection}>
         <h2>Why Prompterio?</h2>
         <div className={styles.featuresGrid}>
-          <FeatureCard 
-            title="Customizable Speed" 
-            description="Adjust the scrolling rate precisely to match your speaking pace, ensuring a natural delivery."
-          />
-          <FeatureCard 
-            title="Mirror Mode" 
-            description="Essential for camera setups. Flip the text horizontally so it reads correctly when reflected."
-          />
-          <FeatureCard 
-            title="Any Device, Any Time" 
-            description="Since it's browser-based, access your scripts from your laptop, tablet, or phone."
-          />
-        </div>
+  <FeatureCard 
+    icon={Zap}
+    title="Customizable Speed" 
+    description="Adjust the scrolling rate precisely to match your speaking pace, ensuring a natural delivery."
+  />
+  <FeatureCard 
+    icon={FlipHorizontal}
+    title="Mirror Mode" 
+    description="Essential for camera setups. Flip the text horizontally so it reads correctly when reflected."
+  />
+  <FeatureCard 
+    icon={MonitorSmartphone}
+    title="Any Device, Any Time" 
+    description="Since it's browser-based, access your scripts from your laptop, tablet, or phone."
+  />
+</div>
       </section>
+
+      <section className={styles.howItWorks}>
+        
+  <div className={styles.sectionHeader}>
+    <span className={styles.badge}>Process</span>
+    <h2>Master your video in 3 steps</h2>
+  </div>
+
+  <div className={styles.stepsGrid}>
+    <div className={styles.stepCard}>
+      <div className={styles.stepNumber}>1</div>
+      <h3>Write or Paste</h3>
+      <p>Import your script into our editor. Clean, simple, and distraction-free.</p>
+    </div>
+
+    <div className={styles.stepLine}></div> {/* Línea decorativa entre pasos */}
+
+    <div className={styles.stepCard}>
+      <div className={styles.stepNumber}>2</div>
+      <h3>Set your Pace</h3>
+      <p>Adjust the scroll speed and font size. Enable Mirror Mode for pro rigs.</p>
+    </div>
+
+    <div className={styles.stepLine}></div>
+
+    <div className={styles.stepCard}>
+      <div className={styles.stepNumber}>3</div>
+      <h3>Record & Shine</h3>
+      <p>Hit play and maintain perfect eye contact with your audience every time.</p>
+    </div>
+  </div>
+</section>
 
       {/* --- 4. Final Call-to-Action --- */}
       <section className={styles.ctaFinal}>

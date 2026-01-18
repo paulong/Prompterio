@@ -1,162 +1,332 @@
-.page {
-  --background: #fafafa;
-
+/* --- Variables Modernas --- */
+.container {
+  position: relative;
+  background-color: #ffffff;
+  /* Textura de puntos sutil (estilo técnico) */
+  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 32px 32px; 
+  overflow: hidden;
+  min-height: 100vh;
 }
 
-.main {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
- 
+/* Ilustraciones abstractas (Blobs) */
+.blobBlue {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(30px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blobPurple {
+  position: absolute;
+  top: 40%;
+  left: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
 }
 
 
-/* Navigation Bar Styles */
-.navbar { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 20px 20px; 
-  border-bottom: 1px solid #eee; 
-}
 
-.navLinks{
-  display: flex; gap: 15px; align-items: center; 
-}
 
-/* hero */
-.hero{ 
-  text-align: center; padding: 80px 0;
-
-}
-
-.hero h1 { font-size: 3rem; margin-bottom: 10px; }
-.hero h2 { font-size: 1.5rem; color: #555; margin-bottom: 40px; }
-.heroSubtext { margin-top: 15px; color: #888; }
-/* Preview Placeholder */
-.appPreviewPlaceholder { background-color: #ccc; height: 300px; width: 100%; max-width: 800px; margin: 40px auto 0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #333; font-style: italic; }
-
-/* Features */
-        .featuresSection { padding: 60px 20px; text-align: center; }
-        .featuresGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
-        .featureCard { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: left;  color: black;}
-        .featureCard h3 { color: black; }
-
-/* Final CTA */
-.ctaFinal { text-align: center; padding: 60px 0; background-color: #e9eff5; margin: 40px 20px; border-radius: 12px; color: black; }
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-}
-
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  
-}
-
-@media (prefers-color-scheme: dark) {
- 
-
-  .page {
-    --background: #000;
-    
-  }
-}
-
-/* Navigation Container */
+/* --- Navigation --- */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 5%;
-  background: #fff;
-  border-bottom: 1px solid #eaeaea;
+  padding: 1.25rem 5%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px); /* Efecto cristal */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-color);
 }
 
-/* Grouping for the User Info and Buttons */
-.userMenu {
+.navbar h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* --- Hero Section --- */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 4rem; /* Más grande y potente */
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+}
+.logoGroup {
   display: flex;
   align-items: center;
-  gap: 1.5rem; /* Space between Hi, App Link, and Logout */
+  gap: 10px;
 }
 
-/* The "Hi, Name" text */
-.welcomeText {
-  font-weight: 500;
-  color: #333;
+.logoIcon {
+  font-size: 1.5rem;
+}
+
+/* Tip: El span con gradiente lo añadiremos en el JS */
+.gradientText {
+  background: linear-gradient(90deg, #0070f3, #7928ca);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero h2 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+
+/* --- Preview Placeholder --- */
+.appPreviewPlaceholder {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  height: 400px;
+  width: 90%;
+  max-width: 1000px;
+  margin: 60px auto 0;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+
+/* --- Features Section --- */
+.featuresSection {
+  padding: 100px 5%;
+  background-color: var(--bg-soft);
+}
+
+.featuresSection h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 50px;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.iconContainer {
+  background-color: #f0f7ff; /* Un azul muy suave */
+  color: #0070f3; /* El azul de tu marca o negro */
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0, 112, 243, 0.1);
+}
+.featureCard {
+  background-color: white;
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.featureCard h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #111;
+}
+
+.featureCard p {
+  color: #666;
   font-size: 0.95rem;
+  line-height: 1.6;
 }
-
-/* The "Open App" button - making it stand out */
-.appLink {
-  background-color: #000;
-  color: #fff !important; /* Force white text */
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.appLink:hover {
-  background-color: #333;
-  transform: translateY(-1px);
-}
-
-/* The Logout Link */
-.signoutBtn {
-  background: none;
-  border: none;
-  color: #999;
-  cursor: pointer;
-  font-size: 0.85rem;
-  text-decoration: none;
-  padding: 0;
-  transition: color 0.2s ease;
-}
-
-.signoutBtn:hover {
-  color: #ff4757; /* A subtle red to indicate "action" */
-}
-
-/* Style for the original Primary Button component */
+/* --- Buttons --- */
 .primaryButton {
   display: inline-block;
-  background: #000;
-  color: #fff;
-  padding: 14px 28px;
-  border-radius: 10px;
-  text-decoration: none;
+  background: #000000;
+  color: #ffffff !important; /* Texto blanco puro */
+  padding: 16px 36px;
+  border-radius: 12px;
   font-weight: 700;
-  margin-top: 20px;
-  transition: opacity 0.2s;
+  font-size: 1.05rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 10;
 }
 
 .primaryButton:hover {
-  opacity: 0.8;
+  transform: translateY(-3px);
+  background: #1a1a1a;
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsive fix for mobile */
-@media (max-width: 600px) {
-  .userMenu {
-    gap: 10px;
+/* --- Final CTA --- */
+.ctaFinal {
+  text-align: center;
+  padding: 100px 40px;
+  /* Gradiente negro profundo para que el blanco resalte */
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+  margin: 80px 5%;
+  border-radius: 32px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Agregamos un brillo sutil detrás del botón final */
+.ctaFinal::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 112, 243, 0.2);
+  filter: blur(80px);
+  z-index: 1;
+}
+
+.ctaFinal h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+.ctaFinal p { opacity: 0.8; margin-bottom: 2rem; }
+.ctaFinal a { background: black; color: white; }
+
+/* --- Footer --- */
+.footer {
+  padding: 40px;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+  .featuresGrid { grid-template-columns: 1fr; }
+}
+
+.howItWorks {
+  padding: 100px 5%;
+  text-align: center;
+  background-color: #fff;
+}
+
+.sectionHeader {
+  margin-bottom: 60px;
+}
+
+.badge {
+  background: #f0f7ff;
+  color: #0070f3;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.howItWorks h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-top: 15px;
+  letter-spacing: -0.02em;
+}
+
+.stepsGrid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.stepCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.stepNumber {
+  width: 50px;
+  height: 50px;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.stepCard h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.stepCard p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Línea conectora (solo visible en escritorio) */
+.stepLine {
+  flex: 0.5;
+  height: 2px;
+  background: #eee;
+  margin-top: 25px;
+}
+
+/* Responsive para celulares */
+@media (max-width: 768px) {
+  .stepsGrid {
+    flex-direction: column;
+    gap: 50px;
   }
-  .welcomeText {
-    display: none; /* Hide "Hi, Name" on tiny screens to save space */
+  .stepLine {
+    display: none;
   }
 }

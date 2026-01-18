@@ -10,12 +10,38 @@ export default function PricingPage() {
 
   // Tu URL de producto (Asegúrate que sea la de 'Checkout' de la pestaña Share)
   const GUMROAD_URL = "https://aenema.gumroad.com/l/prompterio?wanted=true";
-
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Prompterio",
+  "operatingSystem": "WEB",
+  "applicationCategory": "MultimediaApplication",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "ratingCount": "120"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "3.99",
+    "priceCurrency": "USD"
+  }
+};
   return (
+    <section>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <div className={styles.container}>
       {/* QUITAMOS EL SCRIPT DE AQUÍ PORQUE YA ESTÁ EN EL LAYOUT */}
 
-      <h1 className={styles.title}>Upgrade to Prompterio Pro</h1>
+      <h1>
+    The Teleprompter That <span className={styles.gradientText}>You Need</span>
+  </h1>
+  <h2>
+    The simplest web-based teleprompter, built for video creators and professional speakers.
+  </h2>
       <p className={styles.subtitle}>Unlock the full potential of your teleprompter.</p>
 
       <div className={styles.card}>
@@ -40,5 +66,6 @@ export default function PricingPage() {
         Back
       </button>
     </div>
+    </section>
   );
 }
