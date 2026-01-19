@@ -2,33 +2,30 @@
   height: 100vh;
   width: 100vw;
   display: flex;
-  flex-direction: column;
-  justify-content: center; /* Esto mantendrá el contenido en el centro vertical */
+  justify-content: center;
   align-items: center;
   overflow: hidden;
   position: relative;
+  margin: 0;
+  padding: 0;
 }
 
-
+/* Área de lectura (Capa de fondo) */
 .prompterArea {
-  width: 100%;
-  height: 100vh; /* Ocupa toda la pantalla */
-  overflow-y: scroll;
-  scrollbar-width: none;
-  position: absolute; /* Para que no empuje a otros elementos */
+  position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  /* El padding-top hace que el texto empiece abajo del centro */
+  padding: 60vh 10% 70vh 10%;
+  text-align: center;
+  scrollbar-width: none;
 }
+
 .prompterArea::-webkit-scrollbar {
   display: none;
-}
-
-/* Glass Scrollbar matching the dynamic contrast */
-.prompterArea::-webkit-scrollbar { width: 8px; }
-.prompterArea::-webkit-scrollbar-track { background: transparent; }
-.prompterArea::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1); /* This can be adjusted in JS if needed */
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
 }
 
 .scrollingText {
@@ -36,26 +33,24 @@
   font-weight: 800;
   line-height: 1.3;
   white-space: pre-wrap;
-  padding-top: 55vh; /* El texto empieza a mitad de pantalla */
-  padding-bottom: 60vh;
-  padding-left: 10%;
-  padding-right: 10%;
   transition: opacity 0.3s ease;
 }
 
+/* El cuadro de texto (Editor) */
 .glassInput {
+  position: relative; /* Para que el flex del container lo centre */
   width: 85%;
   max-width: 850px;
-  height: 350px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  height: 380px;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   border-radius: 24px;
   padding: 35px;
   font-size: 1.3rem;
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  z-index: 100; /* Siempre por encima del texto de fondo */
-  margin: 0; /* Eliminamos cualquier margen que lo mueva */
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  z-index: 100;
 }
 
 .countdownOverlay {
@@ -63,16 +58,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 15rem;
+  font-size: 18rem;
   font-weight: 900;
   z-index: 2000;
   pointer-events: none;
-  transition: color 0.5s ease;
 }
 
 .floatingControls {
   position: fixed;
-  bottom: 40px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   backdrop-filter: blur(20px);
@@ -84,22 +78,14 @@
   align-items: center;
   z-index: 1000;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  transition: background 0.5s ease;
 }
 
 .textBtn {
   background: none;
   border: none;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.75rem;
   text-transform: uppercase;
   cursor: pointer;
-  transition: color 0.5s ease;
-}
-
-@media (max-width: 600px) {
-  .prompterArea {
-    padding-top: 45vh; /* Un poco menos en móviles para no tardar tanto en ver el texto */
-  }
+  transition: color 0.3s ease;
 }

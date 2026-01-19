@@ -12,6 +12,7 @@ export default function TeleprompterPage() {
   const [text, setText] = useState("Your script here...");
   const [speed, setSpeed] = useState(4);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isStarted, setIsStarted] = useState(false); // <--- NUEVO ESTADO
   const [bgColor, setBgColor] = useState("#ffffff");
   const [countdown, setCountdown] = useState(null);
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -28,32 +29,30 @@ export default function TeleprompterPage() {
 
   const contrastColor = getContrastColor(bgColor);
 
- const [isStarted, setIsStarted] = useState(false); 
-
-const handlePlay = useCallback(() => {
-  if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-  
-  // Si ya estamos moviéndonos, solo pausamos el movimiento, NO salimos al editor
-  if (isScrolling) { 
-    setIsScrolling(false); 
-    return; 
-  }
-  
-  // Si no hemos empezado el modo lectura, marcamos que ya empezamos
-  if (!isStarted) setIsStarted(true);
-
-  let timer = 3;
-  setCountdown(timer);
-  const interval = setInterval(() => {
-    timer -= 1;
-    if (timer > 0) setCountdown(timer);
-    else {
-      clearInterval(interval);
-      setCountdown(null);
-      setIsScrolling(true);
+  const handlePlay = useCallback(() => {
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    
+    // Si ya estamos leyendo, el botón de Stop solo PAUSA el movimiento
+    if (isScrolling) { 
+      setIsScrolling(false); 
+      return; 
     }
-  }, 1000);
-}, [isScrolling, isStarted]);
+    
+    // Si no habíamos empezado, entramos al modo lectura
+    setIsStarted(true);
+    
+    let timer = 3;
+    setCountdown(timer);
+    const interval = setInterval(() => {
+      timer -= 1;
+      if (timer > 0) setCountdown(timer);
+      else {
+        clearInterval(interval);
+        setCountdown(null);
+        setIsScrolling(true);
+      }
+    }, 1000);
+  }, [isScrolling]);
 
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -65,8 +64,6 @@ const handlePlay = useCallback(() => {
     }
   };
 
-  // --- TODOS LOS EFFECTS JUNTOS Y ARRIBA ---
-  
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/auth");
@@ -98,107 +95,81 @@ const handlePlay = useCallback(() => {
     return () => cancelAnimationFrame(frame);
   }, [isScrolling, speed]);
 
-  // --- RETORNOS CONDICIONALES AL FINAL ---
-
   if (status === "loading") return <div className={styles.container}><p>Cargando...</p></div>;
-  
-  // Si no hay sesión o no es pro, mostramos un div vacío mientras el router redirige
-  // Esto evita que React se queje de los hooks
   if (!session || !session.user.isPro) return <div className={styles.container} />;
 
-  
-
   return (
-   <div className={styles.container} style={{ backgroundColor: bgColor }}>
-  
-  {/* 1. EL TEXTO DEL PROMPTER (Capa de fondo) */}
-  <div className={styles.prompterArea} ref={scrollRef}>
-    <div 
-      className={styles.scrollingText} 
-      style={{ 
-        color: contrastColor,
-        // Agregamos esta lógica para que el texto no se vea "detrás" de la caja cuando escribes
-        opacity: isScrolling || countdown ? (countdown ? 0.3 : 1) : 0 
-      }}
-    >
-      {text}
-      <div style={{ height: "60vh" }} /> {/* Espacio para el final */}
-    </div>
-  </div>
+    <div className={styles.container} style={{ backgroundColor: bgColor }}>
+      
+      {/* 1. CUENTA REGRESIVA */}
+      {countdown && (
+        <div className={styles.countdownOverlay} style={{ color: contrastColor }}>
+          {countdown}
+        </div>
+      )}
 
-  {/* 2. LA CAJA DE TEXTO (Capa superior, fuera del scroll) */}
-  {!isScrolling && !countdown && (
-    <textarea 
-      className={styles.glassInput}
-      style={{ 
-        backgroundColor: getContrastColor(bgColor, 0.05), 
-        color: contrastColor, 
-        borderColor: getContrastColor(bgColor, 0.1) 
-      }}
-      value={text}
-      onChange={(e) => setText(e.target.value)}
-    />
-  )}
+      {/* 2. ÁREA DEL PROMPTER (Se ve si ya empezamos o estamos en cuenta regresiva) */}
+      <div className={styles.prompterArea} ref={scrollRef}>
+        <div 
+          className={styles.scrollingText} 
+          style={{ 
+            color: contrastColor,
+            opacity: isStarted ? 1 : 0 // Oculto mientras editamos
+          }}
+        >
+          {text}
+          <div style={{ height: "60vh" }} />
+        </div>
+      </div>
 
-  {/* 3. EL CONTADOR */}
-  {countdown && (
-    <div className={styles.countdownOverlay} style={{ color: contrastColor }}>
-      {countdown}
-    </div>
-  )}
+      {/* 3. EL SCRIPT / EDITOR (Solo si NO hemos empezado) */}
+      {!isStarted && !countdown && (
+        <textarea 
+          className={styles.glassInput}
+          style={{ 
+            backgroundColor: getContrastColor(bgColor, 0.05), 
+            color: contrastColor, 
+            borderColor: getContrastColor(bgColor, 0.1) 
+          }}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+      )}
 
- {/* 4. Botones */}
-
+      {/* 4. BOTONES DE CONTROL */}
       <div className={styles.floatingControls} style={{ background: getContrastColor(bgColor, 0.15) }}>
-  
-  {/* BOTÓN DINÁMICO: HOME O EDIT */}
-  <button 
-    onClick={() => {
-      if (isStarted) {
-        setIsStarted(false); // Sale del modo prompter y vuelve al textarea
-        setIsScrolling(false); // Detiene el scroll
-      } else {
-        router.push('/'); // Si ya está en modo edición, va a la home
-      }
-    }} 
-    className={styles.textBtn} 
-    style={{ color: contrastColor }}
-  >
-    {isStarted ? 'Edit' : 'Home'}
-  </button>
+        
+        {/* Este botón ahora sirve para VOLVER a editar o ir a Home */}
+        <button 
+          onClick={() => {
+            if (isStarted) {
+              setIsStarted(false);
+              setIsScrolling(false);
+            } else {
+              router.push('/');
+            }
+          }} 
+          className={styles.textBtn} 
+          style={{ color: contrastColor }}
+        >
+          {isStarted ? "Edit Script" : "Home"}
+        </button>
 
-  {/* BOTÓN PLAY/STOP: Ahora solo pausa el movimiento, no cierra el prompter */}
-  <button 
-    onClick={handlePlay} 
-    className={styles.textBtn} 
-    style={{ color: isScrolling ? '#ff4757' : contrastColor }}
-  >
-    {isScrolling ? "Pause" : "Play"}
-  </button>
+        <button onClick={handlePlay} className={styles.textBtn} style={{ color: isScrolling ? '#ff4757' : contrastColor }}>
+          {isScrolling ? "Pause" : "Play"}
+        </button>
 
-  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-    <span style={{ fontSize: '0.6rem', fontWeight: '900', color: getContrastColor(bgColor, 0.5) }}>SPEED</span>
-    <input 
-      type="range" 
-      min="1" 
-      max="5" 
-      value={speed} 
-      onChange={(e) => setSpeed(Number(e.target.value))} 
-      style={{ width: '80px' }} 
-    />
-  </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '0.6rem', fontWeight: '900', color: getContrastColor(bgColor, 0.5) }}>SPEED</span>
+          <input type="range" min="1" max="10" value={speed} onChange={(e) => setSpeed(Number(e.target.value))} style={{ width: '80px' }} />
+        </div>
 
-  <input 
-    type="color" 
-    value={bgColor} 
-    onChange={(e) => setBgColor(e.target.value)} 
-    style={{ width: '25px', height: '25px', border: 'none', background: 'none', cursor: 'pointer' }} 
-  />
-
-  <button onClick={toggleFullScreen} className={styles.textBtn} style={{ color: contrastColor }}>
-    {isFullScreen ? "Exit" : "Full"}
-  </button>
-</div>
+        <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} style={{ width: '25px', height: '25px', border: 'none', background: 'none', cursor: 'pointer' }} />
+        
+        <button onClick={toggleFullScreen} className={styles.textBtn} style={{ color: contrastColor }}>
+          {isFullScreen ? "Exit" : "Full"}
+        </button>
+      </div>
     </div>
   );
 }
