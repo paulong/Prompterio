@@ -3,20 +3,23 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
+  justify-content: center; /* Esto mantendrá el contenido en el centro vertical */
   align-items: center;
   overflow: hidden;
   position: relative;
-  transition: background-color 0.5s ease;
 }
 
 
 .prompterArea {
   width: 100%;
-  flex: 1;
+  height: 100vh; /* Ocupa toda la pantalla */
   overflow-y: scroll;
-  padding: 60vh 10% 80vh 10%;
-  text-align: center;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+  position: absolute; /* Para que no empuje a otros elementos */
+  top: 0;
+}
+.prompterArea::-webkit-scrollbar {
+  display: none;
 }
 
 /* Glass Scrollbar matching the dynamic contrast */
@@ -33,22 +36,26 @@
   font-weight: 800;
   line-height: 1.3;
   white-space: pre-wrap;
-  transition: color 0.5s ease;
+  padding-top: 55vh; /* El texto empieza a mitad de pantalla */
+  padding-bottom: 60vh;
+  padding-left: 10%;
+  padding-right: 10%;
+  transition: opacity 0.3s ease;
 }
 
 .glassInput {
-  width: 80%;
-  max-width: 800px;
-  height: 200px;
+  width: 85%;
+  max-width: 850px;
+  height: 350px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 30px;
-  font-size: 1.2rem;
+  border-radius: 24px;
+  padding: 35px;
+  font-size: 1.3rem;
   outline: none;
-  margin-bottom: 350px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  transition: all 0.5s ease;
+  z-index: 100; /* Siempre por encima del texto de fondo */
+  margin: 0; /* Eliminamos cualquier margen que lo mueva */
 }
 
 .countdownOverlay {

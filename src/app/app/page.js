@@ -97,38 +97,43 @@ export default function TeleprompterPage() {
   if (!session || !session.user.isPro) return <div className={styles.container} />;
 
   return (
-    <div className={styles.container} style={{ backgroundColor: bgColor }}>
-      {countdown && (
-        <div className={styles.countdownOverlay} style={{ color: contrastColor }}>
-          {countdown}
-        </div>
-      )}
+   <div className={styles.container} style={{ backgroundColor: bgColor }}>
+  
+  {/* 1. EL TEXTO DEL PROMPTER (Capa de fondo) */}
+  <div className={styles.prompterArea} ref={scrollRef}>
+    <div 
+      className={styles.scrollingText} 
+      style={{ 
+        color: contrastColor,
+        // Agregamos esta lógica para que el texto no se vea "detrás" de la caja cuando escribes
+        opacity: isScrolling || countdown ? (countdown ? 0.3 : 1) : 0 
+      }}
+    >
+      {text}
+      <div style={{ height: "60vh" }} /> {/* Espacio para el final */}
+    </div>
+  </div>
 
-      <div className={styles.prompterArea} ref={scrollRef}>
-        {!isScrolling && !countdown && (
-          <textarea 
-            className={styles.glassInput}
-            style={{ 
-              backgroundColor: getContrastColor(bgColor, 0.05), 
-              color: contrastColor, 
-              borderColor: getContrastColor(bgColor, 0.1) 
-            }}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-        )}
-        
-        <div 
-          className={styles.scrollingText} 
-          style={{ 
-            color: contrastColor,
-            opacity: countdown ? 0.3 : 1 
-          }}
-        >
-          {text}
-          <div style={{ height: "55vh" }} />
-        </div>
-      </div>
+  {/* 2. LA CAJA DE TEXTO (Capa superior, fuera del scroll) */}
+  {!isScrolling && !countdown && (
+    <textarea 
+      className={styles.glassInput}
+      style={{ 
+        backgroundColor: getContrastColor(bgColor, 0.05), 
+        color: contrastColor, 
+        borderColor: getContrastColor(bgColor, 0.1) 
+      }}
+      value={text}
+      onChange={(e) => setText(e.target.value)}
+    />
+  )}
+
+  {/* 3. EL CONTADOR */}
+  {countdown && (
+    <div className={styles.countdownOverlay} style={{ color: contrastColor }}>
+      {countdown}
+    </div>
+  )}
 
       <div className={styles.floatingControls} style={{ background: getContrastColor(bgColor, 0.15) }}>
         <button onClick={() => router.push('/')} className={styles.textBtn} style={{ color: contrastColor }}>Home</button>
