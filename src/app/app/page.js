@@ -28,22 +28,32 @@ export default function TeleprompterPage() {
 
   const contrastColor = getContrastColor(bgColor);
 
-  const handlePlay = useCallback(() => {
-    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-    if (isScrolling) { setIsScrolling(false); return; }
-    
-    let timer = 3;
-    setCountdown(timer);
-    const interval = setInterval(() => {
-      timer -= 1;
-      if (timer > 0) setCountdown(timer);
-      else {
-        clearInterval(interval);
-        setCountdown(null);
-        setIsScrolling(true);
-      }
-    }, 1000);
-  }, [isScrolling]);
+ const [isStarted, setIsStarted] = useState(false); 
+
+const handlePlay = useCallback(() => {
+  if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+  
+  // Si ya estamos moviéndonos, solo pausamos el movimiento, NO salimos al editor
+  if (isScrolling) { 
+    setIsScrolling(false); 
+    return; 
+  }
+  
+  // Si no hemos empezado el modo lectura, marcamos que ya empezamos
+  if (!isStarted) setIsStarted(true);
+
+  let timer = 3;
+  setCountdown(timer);
+  const interval = setInterval(() => {
+    timer -= 1;
+    if (timer > 0) setCountdown(timer);
+    else {
+      clearInterval(interval);
+      setCountdown(null);
+      setIsScrolling(true);
+    }
+  }, 1000);
+}, [isScrolling, isStarted]);
 
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -96,6 +106,8 @@ export default function TeleprompterPage() {
   // Esto evita que React se queje de los hooks
   if (!session || !session.user.isPro) return <div className={styles.container} />;
 
+  
+
   return (
    <div className={styles.container} style={{ backgroundColor: bgColor }}>
   
@@ -135,20 +147,58 @@ export default function TeleprompterPage() {
     </div>
   )}
 
+ {/* 4. Botones */}
+
       <div className={styles.floatingControls} style={{ background: getContrastColor(bgColor, 0.15) }}>
-        <button onClick={() => router.push('/')} className={styles.textBtn} style={{ color: contrastColor }}>Home</button>
-        <button onClick={handlePlay} className={styles.textBtn} style={{ color: isScrolling ? '#ff4757' : contrastColor }}>
-          {isScrolling ? "Stop" : "Play"}
-        </button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{ fontSize: '0.6rem', fontWeight: '900', color: getContrastColor(bgColor, 0.5) }}>SPEED</span>
-          <input type="range" min="1" max="5" value={speed} onChange={(e) => setSpeed(Number(e.target.value))} style={{ width: '80px' }} />
-        </div>
-        <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} style={{ width: '25px', height: '25px', border: 'none', background: 'none', cursor: 'pointer' }} />
-        <button onClick={toggleFullScreen} className={styles.textBtn} style={{ color: contrastColor }}>
-          {isFullScreen ? "Exit" : "Full"}
-        </button>
-      </div>
+  
+  {/* BOTÓN DINÁMICO: HOME O EDIT */}
+  <button 
+    onClick={() => {
+      if (isStarted) {
+        setIsStarted(false); // Sale del modo prompter y vuelve al textarea
+        setIsScrolling(false); // Detiene el scroll
+      } else {
+        router.push('/'); // Si ya está en modo edición, va a la home
+      }
+    }} 
+    className={styles.textBtn} 
+    style={{ color: contrastColor }}
+  >
+    {isStarted ? 'Edit' : 'Home'}
+  </button>
+
+  {/* BOTÓN PLAY/STOP: Ahora solo pausa el movimiento, no cierra el prompter */}
+  <button 
+    onClick={handlePlay} 
+    className={styles.textBtn} 
+    style={{ color: isScrolling ? '#ff4757' : contrastColor }}
+  >
+    {isScrolling ? "Pause" : "Play"}
+  </button>
+
+  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+    <span style={{ fontSize: '0.6rem', fontWeight: '900', color: getContrastColor(bgColor, 0.5) }}>SPEED</span>
+    <input 
+      type="range" 
+      min="1" 
+      max="5" 
+      value={speed} 
+      onChange={(e) => setSpeed(Number(e.target.value))} 
+      style={{ width: '80px' }} 
+    />
+  </div>
+
+  <input 
+    type="color" 
+    value={bgColor} 
+    onChange={(e) => setBgColor(e.target.value)} 
+    style={{ width: '25px', height: '25px', border: 'none', background: 'none', cursor: 'pointer' }} 
+  />
+
+  <button onClick={toggleFullScreen} className={styles.textBtn} style={{ color: contrastColor }}>
+    {isFullScreen ? "Exit" : "Full"}
+  </button>
+</div>
     </div>
   );
 }
