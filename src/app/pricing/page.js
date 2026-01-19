@@ -45,7 +45,7 @@ const jsonLd = {
       <p className={styles.subtitle}>Unlock the full potential of your teleprompter.</p>
 
       <div className={styles.card}>
-        <div className={styles.price}>$9.99<span>/mo</span></div>
+        <div className={styles.price}>$3.99<span>/mo</span></div>
         <ul className={styles.featureList}>
           <li>Unlimited Saved Scripts</li>
           <li>Mirror Mode (Teleprompter Glass)</li>
