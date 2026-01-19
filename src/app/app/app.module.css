@@ -2,15 +2,16 @@
   height: 100vh;
   width: 100vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Centra el textarea horizontalmente */
+  align-items: center;     /* Centra el textarea verticalmente */
   overflow: hidden;
   position: relative;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* Área de lectura (Capa de fondo) */
+/* Capa de lectura */
 .prompterArea {
   position: absolute;
   top: 0;
@@ -18,10 +19,12 @@
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  /* El padding-top hace que el texto empiece abajo del centro */
-  padding: 60vh 10% 70vh 10%;
-  text-align: center;
   scrollbar-width: none;
+  
+  /* ESTO ES LO NUEVO PARA CENTRAR */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el bloque de texto horizontalmente */
 }
 
 .prompterArea::-webkit-scrollbar {
@@ -29,32 +32,44 @@
 }
 
 .scrollingText {
-  width: 100%;         /* Asegura que ocupe todo el ancho disponible */
-  text-align: center;  /* Centra las palabras horizontalmente */
-  margin: 0 auto;      /* Centra el bloque en el medio */
-  font-size: clamp(2.5rem, 8vw, 5.5rem); 
+ 
+  width: 90%; 
+  max-width: 1100px;
+  text-align: center;
+  padding-top: 55vh; 
+  padding-bottom: 70vh;
+  margin: 0 auto;
+  
+  font-size: clamp(2.2rem, 7vw, 5rem); /* Un poco más pequeño para que quepan los iconos bien */
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.4;
   white-space: pre-wrap;
-  transition: opacity 0.3s ease;
+  
+  /* Sombra sutil para que el texto "explote" sobre el fondo */
+  text-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: opacity 0.4s ease;
+
 }
 
-/* El cuadro de texto (Editor) */
+/* El Editor (Caja gris) */
 .glassInput {
-  position: relative; /* Para que el flex del container lo centre */
+  position: relative;
+  z-index: 100;
   width: 85%;
   max-width: 850px;
   height: 380px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
+  background: rgba(255, 255, 255, 0.1); /* Sutil fondo */
   border-radius: 24px;
   padding: 35px;
   font-size: 1.3rem;
   outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-  z-index: 100;
 }
+
+/* ... el resto de tus clases (countdown, floatingControls) se mantienen igual ... */
 
 .countdownOverlay {
   position: fixed;
@@ -90,5 +105,4 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   cursor: pointer;
-  transition: color 0.3s ease;
 }

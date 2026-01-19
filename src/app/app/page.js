@@ -9,10 +9,27 @@ export default function TeleprompterPage() {
   const router = useRouter();
   const { data: session, status } = useSession();
   
-  const [text, setText] = useState("Your script here...");
+  const [text, setText] = useState(`Welcome to your Professional Teleprompter! 🚀
+
+Let's get you ready for a perfect take with these quick tips:
+
+💡 THE LIGHTING SECRET
+Before you hit Play, turn your screen brightness to the MAXIMUM! 🌟 By doing this, your screen acts as a soft lightbox, illuminating your face beautifully while you look directly at the lens. It's the best way to look professional without extra equipment!
+
+⚡ ADJUST YOUR PACE
+Use the SPEED slider below to find your natural rhythm. Start slow (Level 2-3), and as you get more comfortable, feel free to speed it up! 
+
+🎨 PERSONALIZE YOUR VIEW
+Click the color picker to change the background. 🌈 Whether you prefer a classic dark mode or a bright white "Light Box" effect, our smart contrast logic will automatically flip the text color to keep it crystal clear.
+
+🖥️ GO FULL SCREEN
+For a distraction-free experience, hit the "FULL" button. This will hide your browser tabs and keep you focused on your message.
+
+🔄 READY TO SHINE?
+Paste your own script here or practice with this one. When you're ready, hit PLAY, wait for the countdown, and give it your best! ✨`);
   const [speed, setSpeed] = useState(4);
   const [isScrolling, setIsScrolling] = useState(false);
-  const [isStarted, setIsStarted] = useState(false); // <--- NUEVO ESTADO
+  const [isStarted, setIsStarted] = useState(false); 
   const [bgColor, setBgColor] = useState("#ffffff");
   const [countdown, setCountdown] = useState(null);
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -32,13 +49,11 @@ export default function TeleprompterPage() {
   const handlePlay = useCallback(() => {
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
     
-    // Si ya estamos leyendo, el botón de Stop solo PAUSA el movimiento
     if (isScrolling) { 
       setIsScrolling(false); 
       return; 
     }
     
-    // Si no habíamos empezado, entramos al modo lectura
     setIsStarted(true);
     
     let timer = 3;
@@ -101,28 +116,20 @@ export default function TeleprompterPage() {
   return (
     <div className={styles.container} style={{ backgroundColor: bgColor }}>
       
-      {/* 1. CUENTA REGRESIVA */}
-      {countdown && (
-        <div className={styles.countdownOverlay} style={{ color: contrastColor }}>
-          {countdown}
-        </div>
-      )}
-
-      {/* 2. ÁREA DEL PROMPTER (Se ve si ya empezamos o estamos en cuenta regresiva) */}
+      {/* 1. TEXTO DEL PROMPTER (CAPA DE FONDO) */}
       <div className={styles.prompterArea} ref={scrollRef}>
         <div 
           className={styles.scrollingText} 
           style={{ 
             color: contrastColor,
-            opacity: isStarted ? 1 : 0 // Oculto mientras editamos
+            opacity: isStarted ? 1 : 0 
           }}
         >
           {text}
-          <div style={{ height: "60vh" }} />
         </div>
       </div>
 
-      {/* 3. EL SCRIPT / EDITOR (Solo si NO hemos empezado) */}
+      {/* 2. EDITOR DE TEXTO (CAPA MEDIA) */}
       {!isStarted && !countdown && (
         <textarea 
           className={styles.glassInput}
@@ -136,15 +143,21 @@ export default function TeleprompterPage() {
         />
       )}
 
-      {/* 4. BOTONES DE CONTROL */}
+      {/* 3. COUNTDOWN (CAPA SUPERIOR) */}
+      {countdown && (
+        <div className={styles.countdownOverlay} style={{ color: contrastColor }}>
+          {countdown}
+        </div>
+      )}
+
+      {/* 4. CONTROLES */}
       <div className={styles.floatingControls} style={{ background: getContrastColor(bgColor, 0.15) }}>
-        
-        {/* Este botón ahora sirve para VOLVER a editar o ir a Home */}
         <button 
           onClick={() => {
             if (isStarted) {
               setIsStarted(false);
               setIsScrolling(false);
+              if (scrollRef.current) scrollRef.current.scrollTop = 0; // Reset scroll al editar
             } else {
               router.push('/');
             }
