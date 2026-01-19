@@ -39,23 +39,29 @@ export default function Home() {
       </Head>
 
       {/* --- 1. Navigation Bar (Dynamic) --- */}
-      <nav className={styles.navbar}>
-        
-        <h1>Prompterio</h1>
-        <div className={styles.navLinks}>
-          {status === "loading" ? (
-            <span>...</span>
-          ) : session ? (
-            <div className={styles.userMenu}>
-              <span className={styles.welcomeText}>Hi, {session.user.name?.split(' ')[0] || "User"}</span>
-              <Link href="/app" className={styles.appLink}>Open App</Link>
-              <button onClick={() => signOut()} className={styles.signoutBtn}>Logout</button>
-            </div>
-          ) : (
-            <Link href="/auth" className={styles.loginBtn}> Log In </Link>
-          )}
-        </div>
-      </nav>
+  <nav className={styles.navbar}>
+  <h1>Prompterio</h1>
+  <div className={styles.navLinks}>
+    {status === "loading" ? (
+      <span>...</span>
+    ) : session ? (
+      /* Añadimos un estilo inline de flex y gap para forzar la separación */
+      <div className={styles.userMenu} style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+        <span className={styles.welcomeText}>
+          Hi, {session.user.name?.split(' ')[0] || "User"}
+        </span>
+        <Link href="/app" className={styles.appLink}>
+          Open App
+        </Link>
+        <button onClick={() => signOut()} className={styles.signoutBtn}>
+          Logout
+        </button>
+      </div>
+    ) : (
+      <Link href="/auth" className={styles.loginBtn}> Log In </Link>
+    )}
+  </div>
+</nav>
 
       {/* --- 2. Hero Section --- */}
       <header className={styles.hero}>
