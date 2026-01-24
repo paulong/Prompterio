@@ -97,7 +97,7 @@ export default function Home() {
   <FeatureCard 
     icon={FlipHorizontal}
     title="Smart Contrast" 
-    description="Perfect visibility in any room. Change the background color and the text automatically adjusts its contrast for easy reading."
+    description= "Forget about manual adjustments. Change the background color to match your environment, and our AI will automatically flip the text color for crystal-clear readability and zero eye strain."
   />
   <FeatureCard 
     icon={MonitorSmartphone}
