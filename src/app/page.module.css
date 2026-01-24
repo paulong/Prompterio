@@ -403,33 +403,34 @@ background: #f3f4f6;
 
 /* --- Responsive Navbar --- */
 @media (max-width: 768px) {
-  .navbar {
-    
-    height: 60px; /* Un poco más delgada */
+.navbar {
+    padding: 0 15px; /* Reducimos el padding lateral para ganar espacio */
+    height: 60px;
   }
 
   .navbar h1 {
-    font-size: 1.2rem; /* Logo más pequeño */
+    font-size: 1.1rem; /* Logo más pequeño */
   }
 
   .userMenu {
-    gap: 10px; /* Reducimos el espacio entre elementos */
+    gap: 10px; /* Menos espacio entre botones */
   }
 
+  /* Ocultamos el "Hi, User" en móvil para que no empuje el resto */
   .welcomeText {
-    display: none; /* Ocultamos "Hi, Paulo" en móviles para ahorrar espacio */
+    display: none; 
   }
 
   .appLink {
     padding: 6px 12px;
-    font-size: 0.75rem;
-    margin: 0;
+    font-size: 0.8rem;
   }
 
   .signoutBtn {
-    padding: 6px 10px;
     font-size: 0.75rem;
+    padding: 5px;
   }
+
 
   .loginBtn {
     padding: 8px 16px;
@@ -440,10 +441,11 @@ background: #f3f4f6;
 /* Para celulares muy pequeños */
 @media (max-width: 480px) {
   .navbar h1 {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
   
-  .userMenu {
-    gap: 8px;
+  .appLink {
+    padding: 6px 10px;
+    font-size: 0.7rem;
   }
 }

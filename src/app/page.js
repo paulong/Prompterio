@@ -45,8 +45,7 @@ export default function Home() {
     {status === "loading" ? (
       <span>...</span>
     ) : session ? (
-      /* Añadimos un estilo inline de flex y gap para forzar la separación */
-      <div className={styles.userMenu} style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+      <div className={styles.userMenu}>
         <span className={styles.welcomeText}>
           Hi, {session.user.name?.split(' ')[0] || "User"}
         </span>
@@ -97,8 +96,8 @@ export default function Home() {
   />
   <FeatureCard 
     icon={FlipHorizontal}
-    title="Mirror Mode" 
-    description="Essential for camera setups. Flip the text horizontally so it reads correctly when reflected."
+    title="Smart Contrast" 
+    description="Perfect visibility in any room. Change the background color and the text automatically adjusts its contrast for easy reading."
   />
   <FeatureCard 
     icon={MonitorSmartphone}
