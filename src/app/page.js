@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useSession, signOut } from "next-auth/react"; // Added signOut
 import styles from "./page.module.css";
 import Image from 'next/image'
-import { Zap, FlipHorizontal, MonitorSmartphone } from 'lucide-react';
+import { Zap, FlipHorizontal, MonitorSmartphone, Lamp} from 'lucide-react';
 
 
 export default function Home() {
@@ -89,6 +89,11 @@ export default function Home() {
       <section className={styles.featuresSection}>
         <h2>Why Prompterio?</h2>
         <div className={styles.featuresGrid}>
+  <FeatureCard 
+    icon={Lamp}
+    title="Soft-Box Light" 
+    description="Set your screen brightness to MAX, illuminating your face perfectly while you read."
+  />
   <FeatureCard 
     icon={Zap}
     title="Customizable Speed" 
