@@ -47,10 +47,11 @@ const jsonLd = {
       <div className={styles.card}>
         <div className={styles.price}>$3.99<span>/mo</span></div>
         <ul className={styles.featureList}>
-          <li>Unlimited Saved Scripts</li>
-          <li>Mirror Mode (Teleprompter Glass)</li>
+          <li>Write or Paste</li>
+          <li>Brightness</li>
           <li>Adjustable Scroll Speed</li>
-          <li>Remote Control Access</li>
+          <li>Adjustable background color</li>
+          <li>Full screen</li>
         </ul>
         
         <a 

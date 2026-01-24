@@ -97,7 +97,7 @@ export default function Home() {
   <FeatureCard 
     icon={FlipHorizontal}
     title="Smart Contrast" 
-    description= "Forget about manual adjustments. Change the background color to match your environment, and our AI will automatically flip the text color for crystal-clear readability and zero eye strain."
+    description= "Change the background color to match your environment, and our AI will automatically flip the text color for crystal-clear readability."
   />
   <FeatureCard 
     icon={MonitorSmartphone}
@@ -124,14 +124,21 @@ export default function Home() {
 
     <div className={styles.stepCard}>
       <div className={styles.stepNumber}>2</div>
+      <h3>Brightness</h3>
+      <p>Turn your screen brightness to the max. Your monitor will act as a professional light source.</p>
+    </div>
+     <div className={styles.stepLine}></div> {/* Línea decorativa entre pasos */}
+
+    <div className={styles.stepCard}>
+      <div className={styles.stepNumber}>3</div>
       <h3>Set your Pace</h3>
-      <p>Adjust the scroll speed and font size. Enable Mirror Mode for pro rigs.</p>
+      <p>Adjust the scroll speed.</p>
     </div>
 
     <div className={styles.stepLine}></div>
 
     <div className={styles.stepCard}>
-      <div className={styles.stepNumber}>3</div>
+      <div className={styles.stepNumber}>4</div>
       <h3>Record & Shine</h3>
       <p>Hit play and maintain perfect eye contact with your audience every time.</p>
     </div>

@@ -13,20 +13,17 @@ export default function TeleprompterPage() {
 
 Let's get you ready for a perfect take with these quick tips:
 
-💡 THE LIGHTING SECRET
-Before you hit Play, turn your screen brightness to the MAXIMUM! 🌟 By doing this, your screen acts as a soft lightbox, illuminating your face beautifully while you look directly at the lens. It's the best way to look professional without extra equipment!
+💡 LIGHTING IS EVERYTHING
+Set your screen brightness to MAX. Your monitor acts as a soft-box light, illuminating your face perfectly while you read.
 
-⚡ ADJUST YOUR PACE
-Use the SPEED slider below to find your natural rhythm. Start slow (Level 2-3), and as you get more comfortable, feel free to speed it up! 
+🎨 SMART CONTRAST
+Click the color picker below. When you change the background, the text color adapts automatically to ensure you never lose your place.
 
-🎨 PERSONALIZE YOUR VIEW
-Click the color picker to change the background. 🌈 Whether you prefer a classic dark mode or a bright white "Light Box" effect, our smart contrast logic will automatically flip the text color to keep it crystal clear.
+⚡ FIND YOUR SPEED
+Use the slider to set your pace. A setting of 3 or 4 is ideal for most speakers.
 
-🖥️ GO FULL SCREEN
-For a distraction-free experience, hit the "FULL" button. This will hide your browser tabs and keep you focused on your message.
+Ready? Paste your script and shine! ✨`);
 
-🔄 READY TO SHINE?
-Paste your own script here or practice with this one. When you're ready, hit PLAY, wait for the countdown, and give it your best! ✨`);
   const [speed, setSpeed] = useState(4);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isStarted, setIsStarted] = useState(false); 
