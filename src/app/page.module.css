@@ -1,5 +1,7 @@
 /* --- Variables Modernas --- */
 .container {
+  width: 100%;
+  max-width: 100vw; /* Fuerza a que no supere el ancho de la pantalla */
   position: relative;
   background-color: #ffffff;
   /* Textura de puntos sutil (estilo técnico) */
@@ -10,28 +12,29 @@
 }
 
 /* Ilustraciones abstractas (Blobs) */
-.blobBlue {
+.blobBlue, .blobPurple {
   position: absolute;
-  top: -10%;
-  right: -5%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
-  filter: blur(30px);
+  filter: blur(10px);
   z-index: 0;
   pointer-events: none;
+  opacity: 0.9;
+  /* Añade esto para que no empujen el contenido */
+  max-width: 100%; 
 }
 
+.blobBlue {
+  top: -5%;
+  right: -10%;
+  width: 400px; /* Reducido de 600px */
+  height: 400px;
+  background: radial-gradient(circle, #3b82f633 0%, transparent 70%);
+}
 .blobPurple {
-  position: absolute;
-  top: 40%;
-  left: -10%;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
-  filter: blur(60px);
-  z-index: 0;
-  pointer-events: none;
+  top: 20%;
+  left: -20%;
+  width: 500px; /* Reducido de 700px */
+  height: 500px;
+  background: radial-gradient(circle, #8b5cf633 0%, transparent 70%);
 }
 
 
@@ -437,9 +440,10 @@ background: #f3f4f6;
     font-size: 0.8rem;
   }
 
-  .blobPurple {
-    width: 10px;
-  height: 10px;
+ .blobBlue, .blobPurple {
+    width: 250px;
+    height: 250px;
+    opacity: 0.3; /* Menos opacidad para que no distraigan en pantalla pequeña */
   }
 }
 
