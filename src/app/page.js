@@ -37,7 +37,7 @@ export default function Home() {
       <Head>
         <title>Prompterio</title>
         <meta name="description" content="Simple, web-based teleprompter app with customizable speed, size, and mirroring." />
-         <meta name="google-site-verification" content="googlefebe8713c01f3b80.html" />
+         <meta name="google-site-verification" content="googlefebe8713c01f3b80" />
       </Head>
 
       {/* --- 1. Navigation Bar (Dynamic) --- */}
