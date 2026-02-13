@@ -106,7 +106,11 @@ export default function Home() {
     title="Smart Contrast" 
     description= "Change the background color to match your environment, and our AI will automatically flip the text color for crystal-clear readability."
   />
-  
+  <FeatureCard 
+    icon={MonitorSmartphone}
+    title="Any Device, Any Time" 
+    description="Since it's browser-based, access your scripts from your laptop, tablet, or phone."
+  />
 </div>
       </section>
 
