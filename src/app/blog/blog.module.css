@@ -15,11 +15,10 @@
 }
 
 .blogHeader h1 {
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 8vw, 4rem); /* Tamaño fluido: se encoge en móvil */
   font-weight: 800;
   letter-spacing: -0.05em;
-  color: #000;
-  margin-bottom: 15px;
+  padding: 0 10px;
 }
 
 .blogHeader span {
@@ -28,8 +27,8 @@
 
 .postGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); /* Una columna en móvil */
+  gap: 20px;
 }
 
 /* La Card con Glassmorphism */
@@ -38,7 +37,7 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 32px; /* Bordes bien redondeados */
+ 
   padding: 40px;
   text-decoration: none;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -47,6 +46,8 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  padding: 30px 24px; /* Un poco menos de padding en móvil */
+  border-radius: 24px;
 }
 
 .postCard:hover {
@@ -103,4 +104,12 @@
   height: 150px;
   background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 70%);
   z-index: -1;
+}
+
+
+@media (min-width: 768px) {
+  .postGrid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 30px;
+  }
 }
