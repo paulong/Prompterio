@@ -1,0 +1,106 @@
+.blogWrapper {
+  background: radial-gradient(circle at top right, #f8faff 0%, #ffffff 50%);
+  min-height: 100vh;
+  padding: 80px 24px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blogHeader {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.blogHeader h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.blogHeader span {
+  color: #2563eb;
+}
+
+.postGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
+}
+
+/* La Card con Glassmorphism */
+.postCard {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 32px; /* Bordes bien redondeados */
+  padding: 40px;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.postCard:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+/* Icono azul circular */
+.iconBox {
+  width: 44px;
+  height: 44px;
+  background: #2563eb;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  color: white;
+  font-size: 18px;
+  box-shadow: 0 8px 16px rgba(37, 99, 235, 0.2);
+}
+
+.postCard h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.postCard p {
+  font-size: 1.05rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  flex-grow: 1;
+}
+
+.readMore {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #999;
+}
+
+/* Decoración de fondo suave para que se note el glassmorphism */
+.postCard::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -20%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 70%);
+  z-index: -1;
+}

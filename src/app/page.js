@@ -44,6 +44,7 @@ export default function Home() {
   <nav className={styles.navbar}>
   <h1>Prompterio</h1>
   <div className={styles.navLinks}>
+    <Link href="/blog" className="font-bold text-blue-500">Guides</Link>
     {status === "loading" ? (
       <span>...</span>
     ) : session ? (
@@ -54,6 +55,7 @@ export default function Home() {
         <Link href="/app" className={styles.appLink}>
           Open App
         </Link>
+        
         <button onClick={() => signOut()} className={styles.signoutBtn}>
           Logout
         </button>
@@ -106,11 +108,7 @@ export default function Home() {
     title="Smart Contrast" 
     description= "Change the background color to match your environment, and our AI will automatically flip the text color for crystal-clear readability."
   />
-  <FeatureCard 
-    icon={MonitorSmartphone}
-    title="Any Device, Any Time" 
-    description="Since it's browser-based, access your scripts from your laptop, tablet, or phone."
-  />
+  
 </div>
       </section>
 
