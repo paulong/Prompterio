@@ -1,7 +1,7 @@
 .articleContainer {
   /* Esto hace que el cristal tenga algo que 'reflejar' detras */
   background: radial-gradient(circle at top right, #f0f7ff 0%, #ffffff 90%);
- max-width: 800px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px; /* Reducimos padding lateral en móvil */
 }
@@ -48,8 +48,7 @@
   /* Borde sutil para que parezca cristal */
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 24px;
-  
- padding: 40px 20px;
+  padding: 40px 20px;
   text-align: center;
   margin-top: 60px;
   
@@ -76,7 +75,7 @@
   font-size: 1.1rem;
   transition: all 0.3s ease;
   box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.1);
-  width: 100%;
+
   max-width: 300px;
 }
 
