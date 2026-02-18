@@ -20,7 +20,7 @@ export const metadata = {
     default: 'Free Online Teleprompter - No Install - Perfect for Zoom & YouTube',
     template: '%s | Prompterio'
   },
-  description: 'Boost your video confidence with Prompterio. A professional, web-based teleprompter with mirror mode, customizable speed, and cloud sync.',
+  description: 'Stop looking at your notes. Use Prompterios glassmorphism interface to maintain perfect eye contact on camera. 100% Free. Runs in your browser.',
   keywords: ['teleprompter', 'online teleprompter', 'web teleprompter', 'video creator tools', 'mirror mode teleprompter', 'free teleprompter'],
   authors: [{ name: 'Prompterio Team' }],
   creator: 'Prompterio',
