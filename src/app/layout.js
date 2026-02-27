@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: 'Free Online Teleprompter - No Install - Perfect for Zoom & YouTube',
+    default: 'Prompterio | Pro Teleprompter for Zoom & YouTube (Web-Based)',
     template: '%s | Prompterio'
   },
   description: 'Stop looking at your notes. Use Prompterios glassmorphism interface to maintain perfect eye contact on camera. 100% Free. Runs in your browser.',
