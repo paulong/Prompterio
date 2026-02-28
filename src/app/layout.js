@@ -60,10 +60,12 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} >
       <body className={inter.className}>
         <Providers>
+          <main>
           {children}
+          </main>
         </Providers>
 
         
