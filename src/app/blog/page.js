@@ -9,7 +9,7 @@ export default function BlogPage() {
       <h1>Creator <span>Resources</span></h1>
       <p>Tips, tricks and guides to help you become a pro in front of the camera</p>
     </header>
-
+    <main>
     <div className={styles.postGrid}>
       {posts.map((post) => (
         <a href={`/blog/${post.slug}`} className={styles.postCard} key={post.slug}>
@@ -22,6 +22,7 @@ export default function BlogPage() {
         </a>
       ))}
     </div>
+    </main>
   </div>
 </div>
   );
