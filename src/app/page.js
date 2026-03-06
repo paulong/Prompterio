@@ -80,9 +80,7 @@ export default function Home() {
 
         <div className={styles.appPreviewPlaceholder}>
          <p style={{color: '#999', fontSize: '0.9rem'}}>
-          <Image src="/5.png" alt="App Preview" width={650} height={400
-
-          } />
+          <Image src="/5.png" alt="App Preview" width={650} height={400}  />
           </p>
          
         </div>

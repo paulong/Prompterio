@@ -117,6 +117,55 @@ export const posts = [
 
       <p><strong>Final Thought:</strong> Your audience doesn't care if you use a teleprompter. They care about value. If a prompter helps you deliver 2x the value in half the time, it is the most important tool in your kit.</p>
     `
+  },
+  {
+    
+    slug: 'neewer-x12-vertical-iphone-setup',
+    title: 'How to use the Neewer X12 for Vertical iPhone Video (The Honest Way)',
+    description: 'Stop fighting with mounting brackets. Here is how to actually shoot 9:16 video using a professional teleprompter.',
+    content: `
+      <h2>The Problem: Most hardware is "Horizontal First"</h2>
+      <p>If you've bought a Neewer X12 or similar rig, you've realized the phone holder is an afterthought. Trying to mount an iPhone vertically usually puts the lens in the wrong spot or makes the whole thing tilt.</p>
+      
+      <h3>The Workaround</h3>
+      <p>Instead of mounting your recording phone inside the box, try this:</p>
+      <ul>
+        <li><strong>Step 1:</strong> Put your recording iPhone on a separate tripod right behind the prompter glass.</li>
+        <li><strong>Step 2:</strong> Use an iPad or a second phone inside the prompter tray to display the script.</li>
+        <li><strong>Step 3:</strong> Use a web-based prompter with "Mirror Mode" enabled.</li>
+      </ul>
+      
+      <p>This keeps your eye-line perfect without the hardware headache.</p>
+    `
+  },
+  {
+   
+    slug: 'turn-old-ipad-into-teleprompter',
+    title: 'Don’t Buy Hardware: Turn Your Old Tablet Into a Pro Teleprompter',
+    description: 'You don’t need to spend $150 on a glass rig. Learn the "Eye-Line Trick" using just an iPad.',
+    content: `
+      <h2>Save your money</h2>
+      <p>A professional teleprompter is just a glorified mirror. If you are just starting out, you don't need it. You can achieve 90% of the same result with an iPad and a stack of books.</p>
+      
+      <h3>The "Eye-Line Trick"</h3>
+      <p>Place your tablet as close to the camera lens as possible. If the text is small and the tablet is directly below the lens, your eyes won't look like they are reading. I built Prompterio to be lightweight specifically so it runs on older iPads that can't handle heavy apps anymore.</p>
+    `
+  },
+  {
+   
+    slug: 'building-100-lighthouse-score-nextjs',
+    title: 'Engineering a 100/100 Lighthouse Score with Next.js',
+    description: 'A deep dive into how I optimized Prompterio for perfect performance and accessibility.',
+    content: `
+      <h2>Performance is a Feature</h2>
+      <p>When you are recording video, the last thing you want is a laggy browser tab heating up your device. Here is how I hit the perfect 100 score:</p>
+      
+      <h3>1. Fixing the "Main Landmark"</h3>
+      <p>Standard React layouts often wrap everything in generic divs. I ensured every page uses the <code>&lt;main&gt;</code> tag, which instantly fixed my accessibility warnings.</p>
+      
+      <h3>2. Smooth Scrolling vs. CPU Usage</h3>
+      <p>Instead of using JavaScript to animate the scroll position (which is heavy), I used CSS transitions with <code>will-change: transform</code> to ensure the GPU handles the movement. This keeps the fan quiet while you record.</p>
+    `
   }
   
 
